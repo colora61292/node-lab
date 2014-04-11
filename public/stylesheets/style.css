@@ -1,0 +1,20 @@
+/*body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.column {z-index: 99}*/
+
+.ui-menu {
+    z-index: 100;
+    width: 100%;
+    border: 0;
+}
+
+.footer .service dl {
+    width: auto;
+}

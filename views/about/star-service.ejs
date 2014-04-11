@@ -1,0 +1,11 @@
+<div>
+    Login Form&nbsp;&nbsp;<%-((loginFeedback.length==0)?"<br><br>":"")%>
+    <div>
+        <%-loginFeedback %>
+    </div>
+    <form action="<%-loginActionUrl %>" method="POST">
+        <input type="text" id="login" name="login" placeholder="Login" /><br>
+        <input type="text" id="password" name="password" placeholder="Password" /><br>
+        <input type="submit" value="Login" />
+    </form>
+</div>
