@@ -54,35 +54,42 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+//functions
+function makeController(Controller, action){
+	return function(req, res){
+		var controller = new Controller(req, res);
+		controller.beforeAction();
+		controller.actions[action].handle.apply(controller,[controller]);
+		controller.afterAction();
+		controller = null;
+	};
+}
+
 //init db, controllers
 db.init();
 global.urls = [];
 fs.readdirSync('./controllers/').forEach(function(name){
-    var name = name.replace('.js','');
+    name = name.replace('.js','');
     global.urls[name] = [];
     var Controller = require( './controllers/'+name );
     Controller.prototype.Model = require( './models/'+name );
     Controller.prototype.name = name;
     Controller.prototype.cacheClient = redisClient;
     for(var action in Controller.prototype.actions){
-        var page = Controller.prototype.actions[action];
-        if(typeof page.method != 'undefined'
-            && typeof page.url != 'undefined'
-            && typeof page.handle != 'undefined'
-            ){
-            global.urls[name][action] = page.url;
-            for(var key in page.url){
-                app[page.method](page.url[key],(function(Controller, action){
-                    return function(req, res){
-                        var controller = new Controller(req, res);
-                        controller.beforeAction();
-                        controller.actions[action].handle.apply(controller,[controller]);
-                        controller.afterAction();
-                        controller = null;
-                    }
-                })(Controller, action));
-            }
-        }
+	    if (Controller.prototype.actions.hasOwnProperty(action)) {
+			var page = Controller.prototype.actions[action];
+			if(typeof page.method != 'undefined' &&
+			   typeof page.url != 'undefined' &&
+			   typeof page.handle != 'undefined'
+				){
+				global.urls[name][action] = page.url;
+				for(var key in page.url){
+					if (page.url.hasOwnProperty(key)) {
+						app[page.method](page.url[key], makeController(Controller, action));
+					}
+				}
+			}
+		}
     }
 });
 http.createServer(app).listen(app.get('port'), function(){
