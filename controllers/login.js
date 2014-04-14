@@ -1,4 +1,3 @@
-var url = require('../classes/url');
 var util = require('util');
 var SuperController = require('../classes/controller');
 var Controller = function(req, res){
@@ -6,7 +5,7 @@ var Controller = function(req, res){
 };
 util.inherits(Controller, SuperController);
 
-Controller.prototype.layout = 'cms-layout'
+Controller.prototype.layout = 'layout'
 
 Controller.prototype.beforeAction = function(){
     Controller.super_.prototype.beforeAction.apply(this);
@@ -20,7 +19,7 @@ Controller.prototype.afterAction = function(){
 Controller.prototype.actions = {
     index: {
         method: 'get',
-        url: ['/cms/login'],
+        //url: ['/cms/login'],
         handle: function() {
             var this_ = this;
             this.getCache(this_.sessionID+'-'+this_.name,function(err,cache){
@@ -30,7 +29,7 @@ Controller.prototype.actions = {
                 }else{
                     model = new this_.Model();
                     model.init();
-                    model.loginActionUrl = url.getPathInfo('cms-login','auth');
+
                     this_.setCache(this_.sessionID+'-'+this_.name,model);
                 }
                 this_.renderView(model);
@@ -39,7 +38,7 @@ Controller.prototype.actions = {
     },
     auth : {
         method: 'post',
-        url: ['/cms/login/auth'],
+        //url: ['/cms/login/auth'],
         handle: function(req, res) {
 
             /*var feedback = [];

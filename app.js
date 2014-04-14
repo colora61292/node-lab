@@ -55,7 +55,7 @@ if ('development' == app.get('env')) {
 }
 
 //functions
-function makeController(Controller, action){
+var makeController = function(Controller, action){
 	return function(req, res){
 		var controller = new Controller(req, res);
 		controller.beforeAction();
@@ -67,10 +67,11 @@ function makeController(Controller, action){
 
 //init db, controllers
 db.init();
-global.urls = [];
+//global.urls = [];
 fs.readdirSync('./controllers/').forEach(function(name){
+
     name = name.replace('.js','');
-    global.urls[name] = [];
+    //global.urls[name] = [];
     var Controller = require( './controllers/'+name );
     Controller.prototype.Model = require( './models/'+name );
     Controller.prototype.name = name;
@@ -79,18 +80,25 @@ fs.readdirSync('./controllers/').forEach(function(name){
 	    if (Controller.prototype.actions.hasOwnProperty(action)) {
 			var page = Controller.prototype.actions[action];
 			if(typeof page.method != 'undefined' &&
-			   typeof page.url != 'undefined' &&
 			   typeof page.handle != 'undefined'
 				){
-				global.urls[name][action] = page.url;
-				for(var key in page.url){
+                for(var url in config.route){
+                    if (config.route.hasOwnProperty(url)) {
+                        if(config.route[url] == name+'.'+action){
+                            app[page.method](url, makeController(Controller, action));
+                        }
+                    }
+                }
+				//global.urls[name][action] = page.url;
+				/*for(var key in page.url){
 					if (page.url.hasOwnProperty(key)) {
 						app[page.method](page.url[key], makeController(Controller, action));
 					}
-				}
+				}*/
 			}
 		}
     }
+
 });
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

@@ -4,25 +4,31 @@ var config = require( '../classes/config' ) || '';
 module.exports = {
     init: function(){
 
-        var schema   = mongoose.Schema;
+        var Schema = mongoose.Schema;
 
-        var user = new schema({
-            user_id    : String,
-            login    : String,
+        var User = new Schema({
+            userId : String,
             password : String,
-            name : String,
-            update_date : Date
+            role : String
         });
 
-        mongoose.model('user', user);
+        mongoose.model('User', User);
 
-        var div = new schema({
+        var Website = new Schema({
+            htmlElement : [Schema.Types.Mixed],
+            menuElement : [Schema.Types.Mixed],
+            cmsAdmin : [String]
+        }); //remark : no new page, only user care content
+
+        mongoose.model('Website', Website);
+
+        var Element = new Schema({
             name    : String,
             owner : String,
             html : String
         });
 
-        mongoose.model('div', div);
+        mongoose.model('Element ', Element);
 
         mongoose.connect( config.database.connection_string )
 

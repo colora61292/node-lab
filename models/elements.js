@@ -19,7 +19,7 @@ Model.prototype.timtest = '';
 Model.prototype.init = function(){
     this.title = 'Login!';
     this.loginFeedback = 'X_X';
-    this.loginAction = '/cms/login/auth';
+    this.loginActionUrl = '/cms/login/auth';
 };
 
 Model.prototype.auth = function(){};
