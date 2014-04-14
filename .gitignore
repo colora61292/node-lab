@@ -28,3 +28,12 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 classes/config.js
+.idea/.name
+.idea/encodings.xml
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/node-lab.iml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
