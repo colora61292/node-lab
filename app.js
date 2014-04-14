@@ -4,28 +4,37 @@
 /**
  * Module dependencies.
  */
-var express = require('express') || '';
-var app = express();
-app.set('env',require('./env'));
-
-var db = require( './classes/db' ) || '';
-var http = require('http') || '';
-var path = require('path') || '';
+var express = require('express');
+var http = require('http');
+var path = require('path');
 var fs = require('fs');
-var redis = require("redis"),
-    redisClient = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
-var RedisStore = require('connect-redis')(express);
-var kue = require('kue');
 
+//load classes and configs
+var env = require('./configs/env');
+var config = require( './configs/'+env );
+var db = require( './classes/database' );
+
+//load express app
+var app = express();
+
+//load redis
+var redis = require("redis");
+var redisClient = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
+
+//load redis job Q
+var kue = require('kue');
 kue.redis.createClient = function() {
     var client = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
     //client.auth('password');
     return client;
 };
-
 var jobs = kue.createQueue();
 
+//load redis session
+var RedisStore = require('connect-redis')(express);
+
 // all environments
+app.set('env',env);
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -36,9 +45,9 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('12345678'));
-/*app.use(express.session({ store: new RedisStore({
+app.use(express.session({ store: new RedisStore({
     client: redisClient
-}), secret: 'keyboard cat' }))*/
+}), secret: 'keyboard cat' }))
 app.use(express.session({ cookie: { maxAge: 60000 }}));
 //app.use(flash());
 app.use(app.router);
@@ -46,11 +55,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-    global.config = require( './configs/development' );
     redisClient.FLUSHDB();
     app.use(express.errorHandler());
-}else{
-    global.config = require( './configs/development' );
 }
 
 //functions
@@ -65,7 +71,7 @@ var makeController = function(Controller, action){
 }
 
 //init db, controllers
-db.init();
+db.init(config.database.connectionString);
 //global.urls = [];
 fs.readdirSync('./controllers/').forEach(function(name){
 
