@@ -1,8 +1,7 @@
 var mongoose = require( 'mongoose' ) || '';
-//'var config = require( '../configs/dev' ) || '';
 
 module.exports = {
-    init: function(){
+    init: function(connectionString){
 
         var Schema = mongoose.Schema;
 
@@ -30,7 +29,7 @@ module.exports = {
 
         mongoose.model('Element ', Element);
 
-        mongoose.connect( config.database.connection_string )
+        mongoose.connect( connectionString )
 
     }
 };
