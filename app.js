@@ -4,21 +4,17 @@
 /**
  * Module dependencies.
  */
-
-var config = require( './classes/config' );
-var db = require( './classes/db' ) || '';
-
 var express = require('express') || '';
+var app = express();
+app.set('env',require('./env'));
+
+var db = require( './classes/db' ) || '';
 var http = require('http') || '';
 var path = require('path') || '';
 var fs = require('fs');
-//var flash = require('connect-flash');
-var app = express();
-
 var redis = require("redis"),
     redisClient = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
 var RedisStore = require('connect-redis')(express);
-
 var kue = require('kue');
 
 kue.redis.createClient = function() {
@@ -50,8 +46,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
+    global.config = require( './configs/development' );
     redisClient.FLUSHDB();
     app.use(express.errorHandler());
+}else{
+    global.config = require( './configs/development' );
 }
 
 //functions

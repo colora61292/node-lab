@@ -1,5 +1,5 @@
 var mongoose = require( 'mongoose' ) || '';
-var config = require( '../classes/config' ) || '';
+//'var config = require( '../configs/dev' ) || '';
 
 module.exports = {
     init: function(){
