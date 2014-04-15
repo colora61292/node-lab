@@ -39,3 +39,4 @@ classes/config.js
 .idea/workspace.xml
 .idea/libraries/node_lab_node_modules.xml
 configs/*.js
+Rakefile
