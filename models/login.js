@@ -1,27 +1,27 @@
 var mongoose = require( 'mongoose' ) || '';
-var user = mongoose.model( 'user' );
 
-var util = require('util');
-var SuperModel = require('../classes/model');
+module.exports = {
+    init: function(connectionString){
 
-var Model = function(model){
-    Model.super_.apply(this,[model]);
+        var Schema = mongoose.Schema;
+
+        var User = new Schema({
+            login : String,
+            password : String,
+            party : String
+        });
+
+        mongoose.model('User', User);
+
+        var Form = new Schema({
+            name : String,
+            party : String,
+            prototype : Schema.Types.Mixed,
+            elements : [Schema.Types.Mixed]
+        });
+        mongoose.model('Form', Form);
+
+        mongoose.connect( connectionString )
+
+    }
 };
-
-util.inherits(Model, SuperModel);
-
-Model.prototype.loginFeedback = '';
-
-Model.prototype.loginAction = '';
-
-Model.prototype.timtest = '';
-
-Model.prototype.init = function(){
-    this.title = 'Login!';
-    this.loginFeedback = 'X_X';
-    this.loginActionUrl = '/cms/login/auth';
-};
-
-Model.prototype.auth = function(){};
-
-module.exports = Model;
