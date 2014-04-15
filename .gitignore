@@ -41,3 +41,4 @@ classes/config.js
 configs/*.js
 Rakefile
 Rakefile
+development.js
