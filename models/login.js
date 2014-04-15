@@ -1,5 +1,5 @@
 var mongoose = require( 'mongoose' ) || '';
-var User = mongoose.model( 'User' );
+var user = mongoose.model( 'user' );
 
 var util = require('util');
 var SuperModel = require('../classes/model');

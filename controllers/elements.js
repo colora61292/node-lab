@@ -5,7 +5,7 @@ var Controller = function(req, res){
 };
 util.inherits(Controller, SuperController);
 
-Controller.prototype.layout = 'layout'
+Controller.prototype.layout = 'cms-layout'
 
 Controller.prototype.beforeAction = function(){
     Controller.super_.prototype.beforeAction.apply(this);

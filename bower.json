@@ -1,5 +1,5 @@
 {
-    "name": "real time web app",
+    "name": "AngularJS + RequireJS Example",
     "version": "0.1",
     "main": "index.html",
     "ignore": [
