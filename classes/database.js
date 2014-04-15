@@ -6,28 +6,20 @@ module.exports = {
         var Schema = mongoose.Schema;
 
         var User = new Schema({
-            userId : String,
+            login : String,
             password : String,
-            role : String
+            party : String
         });
 
         mongoose.model('User', User);
 
-        var Website = new Schema({
-            htmlElement : [Schema.Types.Mixed],
-            menuElement : [Schema.Types.Mixed],
-            cmsAdmin : [String]
-        }); //remark : no new page, only user care content
-
-        mongoose.model('Website', Website);
-
-        var Element = new Schema({
-            name    : String,
-            owner : String,
-            html : String
+        var Form = new Schema({
+            name : String,
+            party : String,
+            prototype : Schema.Types.Mixed,
+            elements : [Schema.Types.Mixed]
         });
-
-        mongoose.model('Element ', Element);
+        mongoose.model('Form', Form);
 
         mongoose.connect( connectionString )
 

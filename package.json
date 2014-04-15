@@ -1,5 +1,5 @@
 {
-    "name": "kw-node",
+    "name": "node-lab",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -10,6 +10,9 @@
         "ejs": "*",
         "mongoose": "*",
         "mongodb": "*",
-        "connect-flash": "*"
+        "connect-redis": "*",
+        "hiredis": "*",
+        "kue": "*",
+        "redis": "*"
     }
 }
