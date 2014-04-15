@@ -38,4 +38,5 @@ classes/config.js
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/libraries/node_lab_node_modules.xml
-configs/*.js
+configs/development.js
+configs/production.js
