@@ -1,5 +1,5 @@
 var util = require('util');
-var SuperController = require('../classes/controller');
+var SuperController = require('../../classes/controller');
 var Controller = function(req, res){
     Controller.super_.apply(this,[req, res]);
 };
@@ -20,7 +20,7 @@ Controller.prototype.actions = {
     index: {
         method: 'get',
         handle: function() {
-            var model = new this.Model(cache);
+            var model = new this.Model();
             this.renderView(model);
         }
     },

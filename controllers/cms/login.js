@@ -1,5 +1,5 @@
 var util = require('util');
-var SuperController = require('../classes/controller');
+var SuperController = require('../../classes/controller');
 var Controller = function(req, res){
     Controller.super_.apply(this,[req, res]);
 };
@@ -21,19 +21,8 @@ Controller.prototype.actions = {
         method: 'get',
         //url: ['/cms/login'],
         handle: function() {
-            var this_ = this;
-            this.getCache(this_.sessionID+'-'+this_.name,function(err,cache){
-                var model;
-                if(cache){
-                    model = new this_.Model(cache);
-                }else{
-                    model = new this_.Model();
-                    model.init();
-
-                    this_.setCache(this_.sessionID+'-'+this_.name,model);
-                }
-                this_.renderView(model);
-            });
+            var model = new this.Model();
+            this.renderView(model);
         }
     },
     auth : {

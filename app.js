@@ -33,6 +33,48 @@ var jobs = kue.createQueue();
 //load redis session
 var RedisStore = require('connect-redis')(express);
 
+//functions
+var makeController = function(Controller, action){
+    return function(req, res){
+        var controller = new Controller(req, res);
+        controller.beforeAction();
+        controller.actions[action].handle.apply(controller,[controller]);
+        controller.afterAction();
+        controller = null;
+    };
+}
+
+var readController = function(controllerRoot, relativeDir){
+    var dir = controllerRoot + relativeDir;
+    fs.readdirSync(dir).forEach(function(name){
+        if (fs.statSync(dir+name).isDirectory()){
+            readController(dir,name+'/');
+        }else{
+            name = name.replace('.js','');
+            var Controller = require(dir+name);
+            Controller.prototype.Model = require(dir.replace('controllers','models')+name);
+            Controller.prototype.pathInfo = relativeDir+name;
+            Controller.prototype.cacheClient = redisClient;
+            for(var action in Controller.prototype.actions){
+                if (Controller.prototype.actions.hasOwnProperty(action)) {
+                    var page = Controller.prototype.actions[action];
+                    if(typeof page.method != 'undefined' &&
+                        typeof page.handle != 'undefined'
+                        ){
+                        for(var url in config.route){
+                            if (config.route.hasOwnProperty(url)) {
+                                if(config.route[url] == name+'.'+action){
+                                    app[page.method](url, makeController(Controller, action));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+};
+
 // all environments
 app.set('env',env);
 app.set('port', process.env.PORT || 3000);
@@ -48,7 +90,7 @@ app.use(express.cookieParser('12345678'));
 app.use(express.session({ store: new RedisStore({
     client: redisClient
 }), secret: 'keyboard cat' }))
-app.use(express.session({ cookie: { maxAge: 60000 }}));
+//app.use(express.session({ cookie: { maxAge: 60000 }}));
 //app.use(flash());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -59,52 +101,10 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-//functions
-var makeController = function(Controller, action){
-    return function(req, res){
-        var controller = new Controller(req, res);
-        controller.beforeAction();
-        controller.actions[action].handle.apply(controller,[controller]);
-        controller.afterAction();
-        controller = null;
-    };
-}
-
 //init db, controllers
 db.init(config.database.connectionString);
-//global.urls = [];
-fs.readdirSync('./controllers/').forEach(function(name){
+readController('./controllers/','');
 
-    name = name.replace('.js','');
-    //global.urls[name] = [];
-    var Controller = require( './controllers/'+name );
-    Controller.prototype.Model = require( './models/'+name );
-    Controller.prototype.name = name;
-    Controller.prototype.cacheClient = redisClient;
-    for(var action in Controller.prototype.actions){
-        if (Controller.prototype.actions.hasOwnProperty(action)) {
-            var page = Controller.prototype.actions[action];
-            if(typeof page.method != 'undefined' &&
-                typeof page.handle != 'undefined'
-                ){
-                for(var url in config.route){
-                    if (config.route.hasOwnProperty(url)) {
-                        if(config.route[url] == name+'.'+action){
-                            app[page.method](url, makeController(Controller, action));
-                        }
-                    }
-                }
-                //global.urls[name][action] = page.url;
-                /*for(var key in page.url){
-                 if (page.url.hasOwnProperty(key)) {
-                 app[page.method](page.url[key], makeController(Controller, action));
-                 }
-                 }*/
-            }
-        }
-    }
-
-});
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });

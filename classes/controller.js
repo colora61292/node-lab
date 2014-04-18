@@ -81,7 +81,10 @@ Controller.prototype.getCache = function(key, callback) {
 
 Controller.prototype.renderView = function(model, callack) {
     var this_ = this;
-    this.res.render(this.name,model,function(err, html) {
+    this.res.render('./'+this.pathInfo,model,function(err, html) {
+        if(err){
+            html = err;
+        }
         if(this_.layout && this_.layout != ''){
             this_.res.locals.body_ = html;
             if(typeof callack != 'function'){
