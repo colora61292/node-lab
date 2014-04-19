@@ -1,6 +1,5 @@
 var Middleware = function(){
 };
-
-Middleware.prototype.title = '';
+//TODO
 
 module.exports = Middleware;

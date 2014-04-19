@@ -16,10 +16,10 @@ var app = express();
  * kw init
  */
 kw.application.initApp(app);
-global.env = kw.application.env();
-global.config = kw.application.config();
-global.redisClient = kw.application.makeRedisClient();
-global.messages = kw.application.makeMessages();
+//global.env = kw.application.env();
+//global.config = kw.application.config();
+//global.redisClient = kw.application.makeRedisClient();
+//global.messages = kw.application.makeMessages();
 
 //load express app
 //load classes and configs
@@ -105,8 +105,8 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == env) {
-    redisClient.FLUSHDB();
+if ('development' == require('classes/global').env) {
+    require('classes/redis-client').FLUSHDB();
     app.use(express.errorHandler());
 }
 

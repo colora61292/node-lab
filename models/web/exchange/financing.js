@@ -1,7 +1,7 @@
 var util = require('util');
 var SuperModel = require('kw').Model;
 
-var mongoose = require('mongoose') || '';
+var mongoose = require('classes/mongoose') || '';
 var User = mongoose.model( 'User' );
 var url = require('kw').url;
 
