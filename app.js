@@ -8,33 +8,42 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
-
-//load classes and configs
-var env = require('./configs/env');
-var config = require( './configs/'+env );
-var db = require( './classes/database' );
-
-//load express app
+var kw = require('kw');
+var RedisStore = require('connect-redis')(express);
 var app = express();
 
+/**
+ * kw init
+ */
+kw.application.initApp(app);
+global.env = kw.application.env();
+global.config = kw.application.config();
+global.redisClient = kw.application.makeRedisClient();
+global.messages = kw.application.makeMessages();
+
+//load express app
+//load classes and configs
+//var env = kw.env;
+//var config = kw.config;
+
 //load redis
-var redis = require("redis");
-var redisClient = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
+//var redis = require("redis");
+//var redisClient = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
+//var redisClient = kw.application.makeRedisClient();
 
 //load redis job Q
-var kue = require('kue');
-kue.redis.createClient = function() {
-    var client = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
-    //client.auth('password');
-    return client;
-};
-var jobs = kue.createQueue();
+//var kue = require('kue');
+//kue.redis.createClient = function() {
+//    var client = redis.createClient(config.cache.port,config.cache.host,{auth_pass:config.cache.password});
+//    //client.auth('password');
+//    return client;
+//};
+//var jobs = kue.createQueue();
 
 //load redis session
-var RedisStore = require('connect-redis')(express);
 
 //functions
-var makeController = function(Controller, action){
+/*var makeController = function(Controller, action){
     return function(req, res){
         var controller = new Controller(req, res);
         controller.beforeAction();
@@ -42,7 +51,7 @@ var makeController = function(Controller, action){
         controller.afterAction();
         controller = null;
     };
-}
+};
 
 var readController = function(controllerRoot, relativeDir){
     var dir = controllerRoot + relativeDir;
@@ -52,6 +61,7 @@ var readController = function(controllerRoot, relativeDir){
         }else{
             name = name.replace('.js','');
             var Controller = require(dir+name);
+            console.log(dir+name);
             Controller.prototype.Model = require(dir.replace('controllers','models')+name);
             Controller.prototype.pathInfo = relativeDir+name;
             Controller.prototype.cacheClient = redisClient;
@@ -63,7 +73,7 @@ var readController = function(controllerRoot, relativeDir){
                         ){
                         for(var url in config.route){
                             if (config.route.hasOwnProperty(url)) {
-                                if(config.route[url] == name+'.'+action){
+                                if(config.route[url] == dir+name+'.'+action){
                                     app[page.method](url, makeController(Controller, action));
                                 }
                             }
@@ -73,11 +83,10 @@ var readController = function(controllerRoot, relativeDir){
             }
         }
     });
-};
+};*/
 
 // all environments
-app.set('env',env);
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 30000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -88,7 +97,7 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('12345678'));
 app.use(express.session({ store: new RedisStore({
-    client: redisClient
+    client: kw.application.makeRedisClient()
 }), secret: 'keyboard cat' }))
 //app.use(express.session({ cookie: { maxAge: 60000 }}));
 //app.use(flash());
@@ -96,15 +105,21 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
+if ('development' == env) {
     redisClient.FLUSHDB();
     app.use(express.errorHandler());
 }
 
-//init db, controllers
-db.init(config.database.connectionString);
-readController('./controllers/','');
 
+//init db, controllers, config, messages, server
+//readController('controllers/','');
+//global.__base = __dirname;
+//global.config = config;
+//global.messages = {};
+//
+//fs.readdirSync(__dirname+'messages/').forEach(function(name){
+//    global.messages[name] = require(__dirname+'messages/'+name);
+//});
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });

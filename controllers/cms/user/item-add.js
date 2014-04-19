@@ -1,5 +1,5 @@
 var util = require('util');
-var SuperController = require('../../classes/controller');
+var SuperController = require('kw').Controller;
 var Controller = function(req, res){
     Controller.super_.apply(this,[req, res]);
 };
@@ -19,7 +19,6 @@ Controller.prototype.afterAction = function(){
 Controller.prototype.actions = {
     index: {
         method: 'get',
-        //url: ['/cms/login'],
         handle: function() {
             var model = new this.Model();
             this.renderView(model);
@@ -27,27 +26,9 @@ Controller.prototype.actions = {
     },
     auth : {
         method: 'post',
-        //url: ['/cms/login/auth'],
         handle: function(req, res) {
 
-            /*var feedback = [];
 
-             user.find({
-             login:req.param('login'),
-             password:req.param('password')
-             },function ( err, result ){
-             if(result.length == 1)
-             {
-             req.session.user = result[0];
-             res.redirect('/list');
-             }
-             else
-             {
-             feedback.push("Login invalid.");
-             req.flash('login_feedback', feedback);
-             res.redirect('/cms/login');
-             }
-             });*/
 
         }
     }

@@ -3,8 +3,8 @@
 var config = {};
 
 config.route = {
-    '/cms/login':'login.index',
-    '/cms/login/auth':'login.auth'
+    '/cms/login':'cms/user/login.index',
+    '/cms/login/auth':'cms/user/login.auth'
 };
 
 // add env config
