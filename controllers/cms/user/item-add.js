@@ -1,20 +1,9 @@
-var util = require('util');
-var SuperController = require('kw').Controller;
 var Controller = function(req, res){
     Controller.super_.apply(this,[req, res]);
-};
-util.inherits(Controller, SuperController);
-
-Controller.prototype.layout = 'layout'
-
-Controller.prototype.beforeAction = function(){
-    Controller.super_.prototype.beforeAction.apply(this);
-
+    this.layout = 'cms-layout';
 };
 
-Controller.prototype.afterAction = function(){
-    Controller.super_.prototype.afterAction.apply(this);
-};
+require('util').inherits(Controller, require('classes/controller'));
 
 Controller.prototype.actions = {
     index: {
@@ -22,14 +11,6 @@ Controller.prototype.actions = {
         handle: function() {
             var model = new this.Model();
             this.renderView(model);
-        }
-    },
-    auth : {
-        method: 'post',
-        handle: function(req, res) {
-
-
-
         }
     }
 };

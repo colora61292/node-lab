@@ -1,50 +1,63 @@
-var util = require('util');
-var SuperModel = require('kw').Model;
-
-var mongoose = require('classes/mongoose') || '';
-var User = mongoose.model( 'User' );
-var url = require('kw').url;
-
 var Model = function(model){
-    Model.super_.apply(this,[model]);
-    this.title = 'CMS Login';
-    this.loginActionUrl = url.getUrlByPathInfo('cms/user/login.auth');
-    //this.loginActionUrl = '/cms/login/auth';
+    Model.super_.apply(this);
+    this.loginResult = null;
+    this.loginFeedback = '';
+    this.loginActionUrl = require('kw').url.getUrlByPathInfo('cms/user/login.auth');
+    this.initByJSON(model);
 };
 
-util.inherits(Model, SuperModel);
+require('util').inherits(Model, require('classes/model'));
 
-Model.prototype.loginFeedback = '';
+Model.prototype.auth = function(login, password){
 
-Model.prototype.loginActionUrl = '';
+    //TODO login
+    var result = false;
+    var messages = [];
 
-Model.prototype.auth = function(login, password, callback){
+    if(login == 'admin' && password == '12345678'){
+        result = true;
+        messages = ['Login success.'];
+    }else{
+        result = false;
+        messages = ['Login fail.'];
+    }
 
-    var cacheClient = require('classes/cache-client');
+    for(var message in messages){
+        this.loginFeedback = '<br>'+messages[message];
+    }
 
-    User.find({
-        login:login,
-        password:password
-    },function ( err, result ){
-        if(result.length == 1)
-        {
-            callback(null, {
-                result:true,
-                message:''
-            });
-            //req.session.user = result[0];
-            //res.redirect('/list');
-        }
-        else
-        {
-            callback(err, {
-                result:false,
-                message:''
-            });
-            //req.flash('login_feedback', feedback);
-            //res.redirect('/cms/login');
-        }
-    });
+    this.loginResult = result;
+
+    /*callback(null,{
+        result: result,
+        messages: messages
+    });*/
+
+    //var cacheClient = require('classes/cache-client');
+
+    /*User.find({
+     login:login,
+     password:password
+     },function ( err, result ){
+     if(result.length == 1)
+     {
+     callback(null, {
+     result:true,
+     message:''
+     });
+     //req.session.user = result[0];
+     //res.redirect('/list');
+     }
+     else
+     {
+     callback(err, {
+     result:false,
+     message:''
+     });
+     //req.flash('login_feedback', feedback);
+     //res.redirect('/cms/login');
+     }
+     });*/
 
 };
 

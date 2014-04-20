@@ -1,11 +1,21 @@
-<div>
-    Login Form&nbsp;&nbsp;<%-((loginFeedback.length==0)?"<br><br>":"")%>
-    <div>
-        <%-loginFeedback %>
+<div class="container">
+    <div class="page-header">
+        <h1 id="input-groups">内容管理系统登入</h1>
     </div>
-    <form action="<%-loginActionUrl %>" method="POST">
-        <input type="text" id="login" name="login" placeholder="Login" /><br>
-        <input type="text" id="password" name="password" placeholder="Password" /><br>
-        <input type="submit" value="Login" />
+    <form id="cms_user_login_form" name="cms_user_login_form" class="form-signin" method="POST" action="<%-loginActionUrl %>">
+        <input type="hidden" name="cms_user_login_form"  />
+        <h2 class="form-signin-heading">请登入</h2>
+        <input id="login" name="login" type="text" class="form-control" placeholder="用户名" autofocus>
+        <input id="password" name="password" type="password" class="form-control" placeholder="密码">
+        <!--<label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>-->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
     </form>
+    <span style="color:red;">
+        <ul>
+            <%-loginFeedback %>
+        </ul>
+    </span>
+
 </div>

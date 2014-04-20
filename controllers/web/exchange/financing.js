@@ -1,11 +1,11 @@
 var util = require('util');
-var SuperController = require('kw').Controller;
+var SuperController = require('classes/controller');
 var Controller = function(req, res){
     Controller.super_.apply(this,[req, res]);
 };
 util.inherits(Controller, SuperController);
 
-Controller.prototype.layout = 'layout'
+Controller.prototype.layout = 'layout';
 
 Controller.prototype.beforeAction = function(){
     Controller.super_.prototype.beforeAction.apply(this);
