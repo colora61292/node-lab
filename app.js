@@ -4,6 +4,7 @@
 /**
  * Module dependencies.
  */
+global.__base = __dirname;
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -22,6 +23,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(require('connect-multiparty')());
 app.use(express.cookieParser());
 app.use(express.session({secret: "This is a secret"}));
 //app.use(express.cookieParser('12345678'));

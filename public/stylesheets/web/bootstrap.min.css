@@ -2603,8 +2603,8 @@ input[type="button"].btn-block {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('./fonts/glyphicons-halflings-regular.eot');
+  src: url('./fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('./fonts/glyphicons-halflings-regular.woff') format('woff'), url('./fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('./fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 .glyphicon {
@@ -5497,7 +5497,7 @@ a.thumbnail.active {
 height: 160px;
 width: 160px;
 margin-bottom: 60px;
-margin-top: 35px;
+/*margin-top: 35px;*/ 
 margin-right: 12px;
   border-radius: 4px;
 margin-left: 15px;

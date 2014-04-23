@@ -1,3 +1,32 @@
-/**
- * Created by hk13068476447 on 18/4/14.
- */
+<div class="container">
+    <div class="page-header">
+        <h1 id="input-groups">物品管理</h1>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">物品列表</div>
+
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <td width="1%">&nbsp;</td>
+                <% for(var key in itemPrototype){ %>
+                <%  if(itemPrototype[key].display == true){ %>
+                <td><%-itemPrototype[key].name %></td>
+                <%  } %>
+                <% } %>
+            </tr>
+            <% for(var i in itemList){ %>
+            <tr>
+                <td><a href="<%-kw.url.getUrlByPathInfo('cms/user/item-edit.index',{formId:formId,itemId:i}) %>">Edit</a></td>
+                <% for(var j in itemPrototype){ %>
+                <%  if(itemPrototype[j].display == true){ %>
+                <td><%-itemList[i][j] %></td>
+                <%  } %>
+                <% } %>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+
+</div>

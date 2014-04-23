@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="page-header">
+        <h1 id="input-groups">內容類別管理</h1>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">內容類別列表</div>
+
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <td>Name</td>
+            </tr>
+            <% for(var key in categoryList){ %>
+            <tr>
+                <td>
+                    <a href="<%-categoryList[key].url %>"><%-categoryList[key].name %></a>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+
+</div>

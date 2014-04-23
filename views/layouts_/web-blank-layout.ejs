@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../widgets_/web-head.ejs %>
+</head>
+
+<body>
+<div class="container">
+    <% include ../widgets_/web-main-menu.ejs %>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="container">
+                <%-body_ %>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../widgets_/web-bottom-menu.ejs %>
+<script data-main="/javascripts/cms/main" src="/libraries/requirejs/require.js"></script>
+</body>
+</html>

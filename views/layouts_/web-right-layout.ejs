@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../widgets_/web-head.ejs %>
+</head>
+
+<body>
+<div class="container">
+    <% include ../widgets_/web-main-menu.ejs %>
+    <div class="row clearfix">
+        <div class="col-md-9 column">
+            <div class="container">
+                <%-body_ %>
+            </div>
+        </div>
+        <div class="col-md-3 column">
+            <div class="panel-group" id="panel-489719">
+                <div class="panel panel-default">
+                    <div class="panel-heading"> <a class="panel-title" data-toggle="collapse" data-parent="#panel-489719" href="#panel-element-267702">交易产品</a> </div>
+                    <div id="panel-element-267702" class="panel-collapse in">
+                        <div class="panel-body">
+                            <script>
+                                $(function() {
+                                    $( "#menu" ).menu();
+                                });
+                            </script>
+                            <ul id="menu" class="navbar-collapse">
+                                <li class="ui-state-disabled"><a href="#">农产品</a></li>
+                                <li><a href="#">酒类</a></li>
+                                <li><a href="#">纺织品</a></li>
+                                <li> <a href="#">钢材</a>
+                                    <ul>
+                                        <li class="ui-state-disabled"><a href="#">螺纹钢</a></li>
+                                        <li><a href="#">卷材</a></li>
+                                        <li><a href="#">板材</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">棉织品</a></li>
+                                <li> <a href="#">苹果</a>
+                                    <ul>
+                                        <li> <a href="#">生活用品</a>
+                                            <ul>
+                                                <li><a href="#">糖类</a></li>
+                                                <li><a href="#">玉米</a></li>
+                                                <li><a href="#">鸭绒</a></li>
+                                            </ul>
+                                        </li>
+                                        <li> <a href="#">橡胶</a>
+                                            <ul>
+                                                <li><a href="#">香蕉</a></li>
+                                                <li><a href="#">大米</a></li>
+                                                <li><a href="#">大蒜</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">大葱</a></li>
+                                    </ul>
+                                </li>
+                                <li class="ui-state-disabled"><a href="#">辣椒</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading"> <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-489719" href="#panel-element-439605">竞买产品</a> </div>
+                    <div id="panel-element-439605" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <script>
+                                $(function() {
+                                    $( "#menu" ).menu();
+                                });
+                            </script>
+                            <ul id="menu">
+                                <li class="ui-state-disabled"><a href="#">农产品</a></li>
+                                <li><a href="#">酒类</a></li>
+                                <li><a href="#">纺织品</a></li>
+                                <li> <a href="#">钢材</a>
+                                    <ul>
+                                        <li class="ui-state-disabled"><a href="#">螺纹钢</a></li>
+                                        <li><a href="#">卷材</a></li>
+                                        <li><a href="#">板材</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">棉织品</a></li>
+                                <li> <a href="#">苹果</a>
+                                    <ul>
+                                        <li> <a href="#">生活用品</a>
+                                            <ul>
+                                                <li><a href="#">糖类</a></li>
+                                                <li><a href="#">玉米</a></li>
+                                                <li><a href="#">鸭绒</a></li>
+                                            </ul>
+                                        </li>
+                                        <li> <a href="#">橡胶</a>
+                                            <ul>
+                                                <li><a href="#">香蕉</a></li>
+                                                <li><a href="#">大米</a></li>
+                                                <li><a href="#">大蒜</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">大葱</a></li>
+                                    </ul>
+                                </li>
+                                <li class="ui-state-disabled"><a href="#">辣椒</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <button type="button" class="btn btn-default btn-block active">实时数据</button>
+            <br/>
+            <button type="button" class="btn btn-default btn-block active">竞买信息</button>
+            <br/>
+            <button type="button" class="btn btn-default btn-block active">交收信息</button>
+            <br/>
+            <button type="button" class="btn btn-default btn-block active">存货凭证报</button>
+            <br/>
+            <button type="button" class="btn btn-default btn-block active">竞买交易</button>
+            <br/>
+            <button type="button" class="btn btn-default btn-block active">交易软件下载</button>
+        </div>
+    </div>
+</div>
+<% include ../widgets_/web-bottom-menu.ejs %>
+<script data-main="/javascripts/cms/main" src="/libraries/requirejs/require.js"></script>
+</body>
+</html>

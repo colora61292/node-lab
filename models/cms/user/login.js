@@ -10,6 +10,10 @@ require('util').inherits(Model, require('classes/model'));
 
 Model.prototype.auth = function(login, password){
 
+    //TODO for dev, always login
+    login = 'admin';
+    password = '12345678';
+
     //TODO login
     var result = false;
     var messages = [];

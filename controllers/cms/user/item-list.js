@@ -9,8 +9,12 @@ Controller.prototype.actions = {
     index: {
         method: 'get',
         handle: function() {
+            var this_ = this;
             var model = new this.Model();
-            this.renderView(model);
+            var formId = this.req.param('id');
+            model.loadList(formId, function(err){
+                this_.renderView(model);
+            });
         }
     }
 };

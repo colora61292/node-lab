@@ -1,22 +1,8 @@
-var util = require('util');
-var SuperModel = require('classes/model');
-
-var mongoose = require('classes/mongoose') || '';
-var User = mongoose.model( 'User' );
-var url = require('kw').url;
-
 var Model = function(model){
-    Model.super_.apply(this,[model]);
+    Model.super_.apply(this);
+    this.initByJSON(model);
 };
 
-util.inherits(Model, SuperModel);
-
-Model.prototype.loginFeedback = '';
-
-Model.prototype.loginActionUrl = '';
-
-Model.prototype.auth = function(login, password, callback){
-
-};
+require('util').inherits(Model, require('classes/model'));
 
 module.exports = Model;

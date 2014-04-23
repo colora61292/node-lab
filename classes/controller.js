@@ -16,18 +16,17 @@ Controller.prototype.afterAction = function(){
 };
 
 Controller.prototype.checkUserSessionAlive = function(){
-    if(this.req.session['user']){
-        return true;
-    }else{
-        return false;
-    }
+        return this.req.session['user'];
 };
 
 Controller.prototype.setUserSession = function(login){
-    this.req.session['user'] = login;
+    this.req.session['user'] = {
+        login: login,
+        party: 'shanghai'
+    };
 };
 
-Controller.prototype.getUserSession = function(login){
+Controller.prototype.getUserSession = function(){
     return this.req.session['user'];
 };
 

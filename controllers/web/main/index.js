@@ -1,6 +1,6 @@
 var Controller = function(req, res){
     Controller.super_.apply(this,[req, res]);
-    this.layout = 'cms-layout';
+    this.layout = 'web-index-layout';
 };
 
 require('util').inherits(Controller, require('classes/controller'));
