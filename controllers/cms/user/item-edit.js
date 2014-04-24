@@ -18,17 +18,41 @@ Controller.prototype.actions = {
             });
         }
     },
-    htmlEditorFileUpload: {
+    updateItem: {
         method: 'post',
         handle: function() {
-            console.log(this.req.files);
             var this_ = this;
             var model = new this.Model();
-            var funcNum = this_.req.param('CKEditorFuncNum');
-            var filePath = this.req.files.upload.path;
-            model.uploadFile(filePath,funcNum,function(err){
-                this_.res.send(model.callbackFileUrlScript);
+            var formId = this.req.param('formId');
+            var itemId = this.req.param('itemId');
+            var fields = this.req.param('field');
+
+            model.updateItem(formId,itemId,fields,function(err){
+                this_.res.redirect(require('kw').url.getUrlByPathInfo('cms/user/item-edit.index',{formId:formId,itemId:itemId}));
             });
+
+            /*var itemId = this.req.param('itemId');
+            model.uploadItem(formId,itemId,function(err){
+                this_.res.send(model.callbackFileUrlScript);
+            });*/
+        }
+    },
+    deleteItem: {
+        method: 'post',
+        handle: function() {
+            var this_ = this;
+            var model = new this.Model();
+            var formId = this.req.param('formId');
+            var itemId = this.req.param('itemId');
+
+            model.removeItem(formId,itemId,function(err){
+                this_.res.redirect(require('kw').url.getUrlByPathInfo('cms/user/item-list.index',{formId:formId}));
+            });
+
+            /*var itemId = this.req.param('itemId');
+             model.uploadItem(formId,itemId,function(err){
+             this_.res.send(model.callbackFileUrlScript);
+             });*/
         }
     }
 };

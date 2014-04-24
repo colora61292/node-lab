@@ -16,7 +16,14 @@ Model.prototype.loadList = function(formId, callback){
     Form.findOne({'_id': formId}).exec(function(err, doc){
 
         this_.itemPrototype = doc.itemPrototype;
-        this_.itemList = doc.itemList;
+        for(var key in doc.itemList){
+            if(doc.itemList.hasOwnProperty(key)){
+                if(doc.itemList[key].active == 1){
+                    this_.itemList[key] = doc.itemList[key];
+                }
+            }
+        }
+
         callback(err);
 
     });

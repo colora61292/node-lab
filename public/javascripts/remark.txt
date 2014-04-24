@@ -1,0 +1,4 @@
+angular+require X
+require O
+angular+static page O
+

@@ -1,28 +1,28 @@
 <div class="container">
     <div class="page-header">
-        <h1 id="input-groups">物品管理</h1>
+        <h1 id="input-groups"><%-pageTitle %></h1>
     </div>
     <div>
-        <form>
+        <form method="POST" action="<%-formActionUrl %>">
             <% for(var i in itemPrototype){ %>
             <%  if(itemPrototype[i].inputType == 'text'){ %>
             <div class="form-group">
-                <label for="exampleInputEmail1"><%-itemPrototype[i].name %></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
+                <input type="text" class="form-control" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>" value="<%-item[i] %>" />
             </div>
             <%  }else if(itemPrototype[i].inputType == 'html'){ %>
             <div class="form-group">
-                <label for="htmlContent"><%-itemPrototype[i].name %></label>
-                <textarea style="display:none;" id="htmlContent" name="htmlContent"></textarea>
+                <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
+                <textarea style="display:none;" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>"><%-item[i] %></textarea>
             </div>
             <script src="/javascripts/cms/libraries/ckeditor/ckeditor.js"></script>
             <script>
                 (function(){
-                    var editor = CKEDITOR.instances['htmlContent'];
+                    var editor = CKEDITOR.instances['<%-'field['+i+']' %>'];
                     if(editor){ editor.destroy(true); }
-                    CKEDITOR.replace('htmlContent',{
-                        filebrowserUploadUrl  :'<%-kw.url.getUrlByPathInfo('cms/user/item-edit.htmlEditorFileUpload') %>',
-                        filebrowserImageUploadUrl : '<%-kw.url.getUrlByPathInfo('cms/user/item-edit.htmlEditorFileUpload') %>',
+                    CKEDITOR.replace('<%-'field['+i+']' %>',{
+                        filebrowserUploadUrl  :'<%-kw.url.getUrlByPathInfo('cms/process/ckeditor.htmlEditorFileUpload') %>',
+                        filebrowserImageUploadUrl : '<%-kw.url.getUrlByPathInfo('cms/process/ckeditor.htmlEditorFileUpload') %>',
                         bodyClass : 'container',
                         contentsCss : [
                             '/stylesheets/web/base.min.css',
@@ -56,6 +56,8 @@
                 </label>
             </div>-->
             <button type="submit" class="btn btn-default">Submit</button>
+            <button type="button" class="btn btn-default" onclick="window.location='<%-backUrl %>';">Back</button>
+            <button type="button" class="btn btn-default" onclick="postForm('<%-deleteUrl %>');">Delete</button>
         </form>
     </div>
 </div>

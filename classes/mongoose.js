@@ -56,8 +56,8 @@ var Form = mongoose.model('Form');
         html: {display:false,name:'Content',inputType:'html'}
     },
     itemList : {
-        'id123':{name: 'Page 1',html: 'Content 1'},
-        'id234':{name: 'Page 2',html: 'Content 2'}
+        'id123':{name: 'Page 1',html: 'Content 1', active: 1},
+        'id234':{name: 'Page 2',html: 'Content 2', active: 1}
     }
 })).save();
 
@@ -69,8 +69,8 @@ var Form = mongoose.model('Form');
         name: {display:true,name:'Title',inputType:'text'}
     },
     itemList : {
-        'id123':{name: 'Product 1'},
-        'id234':{name: 'Product 2'}
+        'id123':{name: 'Product 1', active: 1},
+        'id234':{name: 'Product 2', active: 1}
     }
 })).save();
 

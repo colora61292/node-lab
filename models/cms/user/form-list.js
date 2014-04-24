@@ -16,7 +16,7 @@ Model.prototype.loadList = function(party, callback){
 
         Form.find({'user': user._id}).stream().on('data', function(doc){
 
-            doc.url = require('kw').url.getUrlByPathInfo('cms/user/item-list.index', {id: doc._id});
+            doc.url = require('kw').url.getUrlByPathInfo('cms/user/item-list.index', {formId: doc._id});
             this_.categoryList.push(doc);
 
         }).on('error', callback).on('close', callback);

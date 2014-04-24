@@ -9,7 +9,8 @@ require.config({
         'angular': '/libraries/angular/angular',
         'angular-route': '/libraries/angular-route/angular-route',
         'domReady': '/libraries/requirejs-domready/domReady',
-        'jquery': '/libraries/jquery/jquery'
+        'jquery': '/libraries/jquery/jquery',
+        'util': '/javascripts/cms/libraries/util'
     },
 
     /**

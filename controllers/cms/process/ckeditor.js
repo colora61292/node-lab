@@ -6,14 +6,15 @@ var Controller = function(req, res){
 require('util').inherits(Controller, require('classes/controller'));
 
 Controller.prototype.actions = {
-    index: {
-        method: 'get',
+    htmlEditorFileUpload: {
+        method: 'post',
         handle: function() {
             var this_ = this;
             var model = new this.Model();
-            var formId = this.req.param('formId');
-            model.loadList(formId, function(err){
-                this_.renderView(model);
+            var funcNum = this_.req.param('CKEditorFuncNum');
+            var filePath = this_.req.files.upload.path;
+            model.uploadFile(filePath,funcNum,function(err){
+                this_.res.send(model.callbackFileUrlScript);
             });
         }
     }
