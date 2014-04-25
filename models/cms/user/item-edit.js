@@ -22,10 +22,22 @@ Model.prototype.loadItem = function(formId, itemId, callback){
     var Form = require('classes/mongoose').model('Form');
     Form.findOne({'_id': formId}).exec(function(err, doc){
 
-        this_.itemPrototype = doc.itemPrototype;
-        this_.item = doc.itemList[itemId]
-        callback(err);
+        var itemPrototype = [];
+        for(var key in doc.itemPrototype){
+            if(doc.itemPrototype.hasOwnProperty(key)){
+                itemPrototype.push(doc.itemPrototype[key]);
+            }
+        }
+        itemPrototype.sort(function(a,b){
+            return a.order- b.order;
+        });
+        this_.itemPrototype = itemPrototype;
 
+        var Item = require('classes/mongoose').model('Item_'+doc._id);
+        Item.findOne({'_id': itemId}).exec(function(err, doc){
+            this_.item = doc;
+            callback(err);
+        });
     });
 
 };
@@ -33,10 +45,10 @@ Model.prototype.loadItem = function(formId, itemId, callback){
 Model.prototype.updateItem = function(formId, itemId, fields, callback){
 
     var this_ = this;
-    var Form = require('classes/mongoose').model('Form');
-    var set = {};
-    set['itemList.'+itemId] = fields;
-    Form.update({_id: formId}, {$set: set}).exec(function(err, result){
+    var Item = require('classes/mongoose').model('Item_'+formId);
+    //var set = {};
+    //set['itemList.'+itemId] = fields;
+    Item.update({_id: itemId}, {$set: fields}).exec(function(err, result){
         callback(err);
     });
 
@@ -45,12 +57,16 @@ Model.prototype.updateItem = function(formId, itemId, fields, callback){
 Model.prototype.removeItem = function(formId, itemId, callback){
 
     var this_ = this;
-    var Form = require('classes/mongoose').model('Form');
-    var set = {};
+    //var Form = require('classes/mongoose').model('Form');
+    var Item = require('classes/mongoose').model('Item_'+formId);
+    Item.remove({_id: itemId}).exec(function (err) {
+        callback(err);
+    });
+    /*var set = {};
     set['itemList.'+itemId+'.active'] = 0;
     Form.update({_id: formId}, {$set: set}).exec(function(err, result){
         callback(err);
-    });
+    });*/
 
 };
 

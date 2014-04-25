@@ -3,7 +3,7 @@
         <h1 id="input-groups">物品管理</h1>
     </div>
     <p>
-        <button type="button" class="btn btn-default btn-lg" onclick="window.location='<%-kw.url.getUrlByPathInfo('cms/user/item-add.index',{formId:formId,itemId:i}) %>'">新增物品</button>
+        <button type="button" class="btn btn-default btn-lg" onclick="window.location='<%-kw.url.getUrlByPathInfo('cms/user/item-add.index',{formId:formId}) %>'">新增物品</button>
         <button type="button" class="btn btn-default btn-lg" onclick="window.location='<%-kw.url.getUrlByPathInfo('cms/user/form-list.index') %>'">返回</button>
     </p>
     <div class="panel panel-default">
@@ -13,6 +13,7 @@
         <table class="table">
             <tr>
                 <td width="1%">&nbsp;</td>
+                <td width="1%" nowrap>Item ID</td>
                 <% for(var key in itemPrototype){ %>
                 <%  if(itemPrototype[key].display == true){ %>
                 <td><%-itemPrototype[key].name %></td>
@@ -21,7 +22,8 @@
             </tr>
             <% for(var i in itemList){ %>
             <tr>
-                <td><a href="<%-kw.url.getUrlByPathInfo('cms/user/item-edit.index',{formId:formId,itemId:i}) %>">Edit</a></td>
+                <td><a href="<%-kw.url.getUrlByPathInfo('cms/user/item-edit.index',{formId:formId,itemId:itemList[i]._id}) %>">Edit</a></td>
+                <td><%-itemList[i]._id %></td>
                 <% for(var j in itemPrototype){ %>
                 <%  if(itemPrototype[j].display == true){ %>
                 <td><%-itemList[i][j] %></td>
@@ -31,5 +33,4 @@
             <% } %>
         </table>
     </div>
-
 </div>

@@ -10,6 +10,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 var kw = require('kw');
+var mongoose = require('classes/mongoose');
 //var RedisStore = require('connect-redis')(express);
 var app = express();
 

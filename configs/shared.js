@@ -25,6 +25,11 @@ config.route = {
     'web/main/index.index':'/'
 };
 
+config.contentKey = {
+    levelOneMenuList:'',
+    levelTwoMenuList:''
+};
+
 config.fileUpload = {
     rootUrl:'/uploads/',
     savePath:'public/uploads/'

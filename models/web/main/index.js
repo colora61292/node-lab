@@ -5,4 +5,13 @@ var Model = function(model){
 
 require('util').inherits(Model, require('classes/model'));
 
+Model.prototype.loadContent = function(){
+
+    var cms = require('classes/cms');
+
+    cms.getItems();
+
+
+};
+
 module.exports = Model;

@@ -9,13 +9,13 @@
         <!-- Table -->
         <table class="table">
             <tr>
+                <td width="1%" nowrap>Form ID</td>
                 <td>Name</td>
             </tr>
             <% for(var key in categoryList){ %>
             <tr>
-                <td>
-                    <a href="<%-categoryList[key].url %>"><%-categoryList[key].name %></a>
-                </td>
+                <td><%-categoryList[key]._id %></td>
+                <td><a href="<%-categoryList[key].url %>"><%-categoryList[key].name %></a></td>
             </tr>
             <% } %>
         </table>

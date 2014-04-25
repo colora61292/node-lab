@@ -5,6 +5,8 @@ var Model = function(model){
     this.formListUrl = require('kw').url.getUrlByPathInfo('cms/user/form-list.index');
     this.leftColumn = false;
     this.rightColumn = false;
+    this.levelOneMenuList = [];
+    this.levelTwoMenuList = [];
 };
 
 //extend super class

@@ -27,13 +27,31 @@ Model.prototype.addItem = function(formId, fields, callback){
 
     var this_ = this;
     var Form = require('classes/mongoose').model('Form');
-    var set = {};
+    var Item = require('classes/mongoose').model('Item_'+formId);
 
+    Form.findOne({_id:formId}).exec(function(err, doc){
+
+        //default value
+        for(var key in doc.itemPrototype){
+            if(doc.itemPrototype.hasOwnProperty(key)){
+                if(!fields[key]){
+                    fields[key] = doc.itemPrototype[key].defaultValue;
+                }
+            }
+        }
+
+        (new Item(fields)).save(function(err, doc, count){
+            callback(err);
+        });
+
+    });
+
+    /*var set = {};
     fields.active = 1;
     set['itemList.'+require('kw').util.guid()] = fields;
     Form.update({_id: formId}, {$set: set}).exec(function(err, result){
         callback(err);
-    });
+    });*/
 
     /*Form.findOne({'_id': formId}).exec(function(err, doc){
      //this_.itemPrototype = doc.itemPrototype;

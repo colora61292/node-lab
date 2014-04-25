@@ -5,12 +5,13 @@
     <div>
         <form method="POST" action="<%-formActionUrl %>">
             <% for(var i in itemPrototype){ %>
-            <%  if(itemPrototype[i].inputType == 'text'){ %>
+            <%  if(itemPrototype.hasOwnProperty(i)){ %>
+            <%      if(itemPrototype[i].inputType == 'text'){ %>
             <div class="form-group">
                 <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
                 <input type="text" class="form-control" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>" value="<%-item[i] %>" />
             </div>
-            <%  }else if(itemPrototype[i].inputType == 'html'){ %>
+            <%      }else if(itemPrototype[i].inputType == 'html'){ %>
             <div class="form-group">
                 <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
                 <textarea style="display:none;" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>"><%-item[i] %></textarea>
@@ -35,6 +36,7 @@
                     });
                 })();
             </script>
+            <%      } %>
             <%  } %>
             <% } %>
             <!--<div class="form-group">
