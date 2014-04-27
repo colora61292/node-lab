@@ -8,20 +8,20 @@
             <%  if(itemPrototype.hasOwnProperty(i)){ %>
             <%      if(itemPrototype[i].inputType == 'text'){ %>
             <div class="form-group">
-                <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
-                <input type="text" class="form-control" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>" value="<%-item[i] %>" />
+                <label for="<%-'field['+itemPrototype[i].id+']' %>"><%-itemPrototype[i].name %></label>
+                <input type="text" class="form-control" id="<%-'field['+itemPrototype[i].id+']' %>" name="<%-'field['+itemPrototype[i].id+']' %>" value="<%-item[itemPrototype[i].id] %>" />
             </div>
             <%      }else if(itemPrototype[i].inputType == 'html'){ %>
             <div class="form-group">
-                <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
-                <textarea style="display:none;" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>"><%-item[i] %></textarea>
+                <label for="<%-'field['+itemPrototype[i].id+']' %>"><%-itemPrototype[i].name %></label>
+                <textarea style="display:none;" id="<%-'field['+itemPrototype[i].id+']' %>" name="<%-'field['+itemPrototype[i].id+']' %>"><%-item[itemPrototype[i].id] %></textarea>
             </div>
             <script src="/javascripts/cms/libraries/ckeditor/ckeditor.js"></script>
             <script>
                 (function(){
-                    var editor = CKEDITOR.instances['<%-'field['+i+']' %>'];
+                    var editor = CKEDITOR.instances['<%-'field['+itemPrototype[i].id+']' %>'];
                     if(editor){ editor.destroy(true); }
-                    CKEDITOR.replace('<%-'field['+i+']' %>',{
+                    CKEDITOR.replace('<%-'field['+itemPrototype[i].id+']' %>',{
                         filebrowserUploadUrl  :'<%-kw.url.getUrlByPathInfo('cms/process/ckeditor.htmlEditorFileUpload') %>',
                         filebrowserImageUploadUrl : '<%-kw.url.getUrlByPathInfo('cms/process/ckeditor.htmlEditorFileUpload') %>',
                         bodyClass : 'container',
@@ -59,7 +59,7 @@
             </div>-->
             <button type="submit" class="btn btn-default">Submit</button>
             <button type="button" class="btn btn-default" onclick="window.location='<%-backUrl %>';">Back</button>
-            <button type="button" class="btn btn-default" onclick="postForm('<%-deleteUrl %>');">Delete</button>
+            <button style="display:none;" type="button" class="btn btn-default" onclick="postForm('<%-deleteUrl %>');">Delete</button>
         </form>
     </div>
 </div>

@@ -32,11 +32,9 @@ Model.prototype.addItem = function(formId, fields, callback){
     Form.findOne({_id:formId}).exec(function(err, doc){
 
         //default value
-        for(var key in doc.itemPrototype){
-            if(doc.itemPrototype.hasOwnProperty(key)){
-                if(!fields[key]){
-                    fields[key] = doc.itemPrototype[key].defaultValue;
-                }
+        for(var i=0;i<doc.itemPrototype.length; i++){
+            if(!fields[doc.itemPrototype[i].id]){
+                fields[doc.itemPrototype[i].id] = doc.itemPrototype[i].defaultValue;
             }
         }
 

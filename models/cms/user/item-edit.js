@@ -22,16 +22,17 @@ Model.prototype.loadItem = function(formId, itemId, callback){
     var Form = require('classes/mongoose').model('Form');
     Form.findOne({'_id': formId}).exec(function(err, doc){
 
-        var itemPrototype = [];
-        for(var key in doc.itemPrototype){
-            if(doc.itemPrototype.hasOwnProperty(key)){
-                itemPrototype.push(doc.itemPrototype[key]);
-            }
+        /*var itemPrototype = [];
+        for(var i=0;i<doc.itemPrototype.length; i++){
+            itemPrototype.push(doc.itemPrototype[i]);
         }
         itemPrototype.sort(function(a,b){
             return a.order- b.order;
+        });*/
+        doc.itemPrototype.sort(function(a,b){
+            return a.order- b.order;
         });
-        this_.itemPrototype = itemPrototype;
+        this_.itemPrototype = doc.itemPrototype;
 
         var Item = require('classes/mongoose').model('Item_'+doc._id);
         Item.findOne({'_id': itemId}).exec(function(err, doc){
@@ -48,7 +49,7 @@ Model.prototype.updateItem = function(formId, itemId, fields, callback){
     var Item = require('classes/mongoose').model('Item_'+formId);
     //var set = {};
     //set['itemList.'+itemId] = fields;
-    Item.update({_id: itemId}, {$set: fields}).exec(function(err, result){
+    Item.update({_id: itemId}, fields).exec(function(err, result){
         callback(err);
     });
 

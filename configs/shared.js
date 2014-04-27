@@ -2,14 +2,6 @@
 //var app = express();
 var config = {};
 
-/*config.route = {
-    '/cms':'cms/user/index.index',
-    '/cms/login':'cms/user/login.index',
-    '/cms/login/auth':'cms/user/login.auth',
-    '/cms/category-list':'cms/user/category-list.index',
-    '/cms/item-list/:_id':'cms/user/item-list.index'
-};*/
-
 config.route = {
     'cms/user/index.index':'/cms',
     'cms/user/login.index':'/cms/login',
@@ -22,26 +14,44 @@ config.route = {
     'cms/user/item-add.index':'/cms/form/:formId/item-add',
     'cms/user/item-add.createItem':'/cms/form/:formId/item-add/create',
     'cms/process/ckeditor.htmlEditorFileUpload':'/cms/ckeditor-file-upload',
-    'web/main/index.index':'/'
+    'cms/user/form-add.index':'/cms/form-add',
+    'cms/user/form-add.createForm':'/cms/form-add/create',
+    'web/main/index.index':'/',
+    'web/about/contact.index':'/about/contact',
+    'web/about/five-lead.index':'/about/five-lead',
+    'web/about/honor.index':'/about/honor',
+    'web/about/introduction.index':'/about/introduction',
+    'web/about/six-service.index':'/about/six-service',
+    'web/exchange/download.index':'/exchange/download',
+    'web/exchange/faq.index':'/exchange/faq',
+    'web/exchange/financing.index':'/exchange/financing',
+    'web/exchange/law.index':'/exchange/law',
+    'web/exchange/notice.index':'/exchange/notice',
+    'web/exchange/product.index':'/exchange/product',
+    'web/exchange/receipt.index':'/exchange/receipt',
+    'web/exchange/register.index':'/exchange/register',
+    'web/exchange/settlement.index':'/exchange/settlement',
+    'web/exchange/trade.index':'/exchange/trade',
+    'web/news/coal.index':'/exchange/coal',
+    'web/news/farm.index':'/exchange/farm',
+    'web/news/metal.index':'/exchange/metal',
+    'web/news/oil.index':'/exchange/oil',
+    'web/research/achievement.index':'/research/achievement',
+    'web/research/apply-service.index':'/research/apply-service',
+    'web/research/recommend.index':'/research/recommend',
+    'web/research/video.index':'/research/video',
+    'web/research/workshop.index':'/research/workshop',
+    'web/rule/exchange.index':'/rule/exchange',
+    'web/rule/law.index':'/rule/law'
 };
 
-config.contentKey = {
-    levelOneMenuList:'',
-    levelTwoMenuList:''
+config.formId = {
+    sitemap:'535c5d2d51cfe4000010e37b'
 };
 
 config.fileUpload = {
     rootUrl:'/uploads/',
     savePath:'public/uploads/'
 };
-// add env config
-/*var envConfig = require('../configs/'+app.get('env'));
-if(envConfig){
-    for(var key in envConfig){
-        if(envConfig.hasOwnProperty(key)){
-            config[key] = envConfig[key];
-        }
-    }
-}*/
 
 module.exports = config;

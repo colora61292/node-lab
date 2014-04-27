@@ -7,20 +7,20 @@
             <% for(var i in itemPrototype){ %>
             <%  if(itemPrototype[i].inputType == 'text'){ %>
             <div class="form-group">
-                <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
-                <input type="text" class="form-control" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>" />
+                <label for="<%-'field['+itemPrototype[i].id+']' %>"><%-itemPrototype[i].name %></label>
+                <input type="text" class="form-control" id="<%-'field['+itemPrototype[i].id+']' %>" name="<%-'field['+itemPrototype[i].id+']' %>" />
             </div>
             <%  }else if(itemPrototype[i].inputType == 'html'){ %>
             <div class="form-group">
-                <label for="<%-'field['+i+']' %>"><%-itemPrototype[i].name %></label>
-                <textarea style="display:none;" id="<%-'field['+i+']' %>" name="<%-'field['+i+']' %>"></textarea>
+                <label for="<%-'field['+itemPrototype[i].id+']' %>"><%-itemPrototype[i].name %></label>
+                <textarea style="display:none;" id="<%-'field['+itemPrototype[i].id+']' %>" name="<%-'field['+itemPrototype[i].id+']' %>"></textarea>
             </div>
             <script src="/javascripts/cms/libraries/ckeditor/ckeditor.js"></script>
             <script>
                 (function(){
-                    var editor = CKEDITOR.instances['<%-'field['+i+']' %>'];
+                    var editor = CKEDITOR.instances['<%-'field['+itemPrototype[i].id+']' %>'];
                     if(editor){ editor.destroy(true); }
-                    CKEDITOR.replace('<%-'field['+i+']' %>',{
+                    CKEDITOR.replace('<%-'field['+itemPrototype[i].id+']' %>',{
                         filebrowserUploadUrl  :'<%-kw.url.getUrlByPathInfo('cms/process/ckeditor.htmlEditorFileUpload') %>',
                         filebrowserImageUploadUrl : '<%-kw.url.getUrlByPathInfo('cms/process/ckeditor.htmlEditorFileUpload') %>',
                         bodyClass : 'container',

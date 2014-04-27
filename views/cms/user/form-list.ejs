@@ -2,6 +2,7 @@
     <div class="page-header">
         <h1 id="input-groups">內容類別管理</h1>
     </div>
+    <p><button style="display:none;" type="button" class="btn btn-default btn-lg" onclick="window.location='<%-kw.url.getUrlByPathInfo('cms/user/form-add.index') %>'">新增內容類別</button></p>
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">內容類別列表</div>
@@ -15,7 +16,7 @@
             <% for(var key in categoryList){ %>
             <tr>
                 <td><%-categoryList[key]._id %></td>
-                <td><a href="<%-categoryList[key].url %>"><%-categoryList[key].name %></a></td>
+                <td><a href="<%-categoryList[key].url %>"><%-categoryList[key].formName %></a></td>
             </tr>
             <% } %>
         </table>

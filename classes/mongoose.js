@@ -1,6 +1,6 @@
 var config = require('kw').application.config();
 
-var cms = require('classes/cms');
+//var cms = require('classes/cms');
 
 /*
  String
@@ -35,19 +35,24 @@ mongoose.model('User', new Schema({
  });*/
 
 mongoose.model('Form', new Schema({
-    userId : { type: Schema.Types.ObjectId, ref: 'User' },
-    name : String,
-    itemPrototype : Schema.Types.Mixed
+    //_id: String,
+    party : String,
+    formName : String,
+    parentItem: {formId:{type: Schema.Types.ObjectId, ref: 'Form'},itemId: Schema.Types.ObjectId},
+    order : Number,
+    permission : Schema.Types.Mixed,
+    itemPrototype : [Schema.Types.Mixed]
 }));
 
 mongoose.connect(config.database.connectionString);
 
-
 //TODO init data for dev
 var User = mongoose.model('User');
+
 User.remove({}, function(err) {
     console.log('User collection removed')
 });
+
 var user = new User({
     _id: mongoose.Types.ObjectId(0),
     login: 'admin',
@@ -56,54 +61,51 @@ var user = new User({
 });
 user.save(function(err, doc, count){
 
-    cms.dropAllData();
+    //cms.dropAllData();
 
-    cms.makeForm('0', doc._id,'Normal HTML',0,{
-        create: true,
-        update: true,
-        read: true,
-        delete: true
-    },{
-        name: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
-        html: {order:3,display:false,hidden:false,readOnly:false,name:'Content',inputType:'html',dataType:'String',defaultValue:''},
-        hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
-        active: {order:4,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
-    },function(err){});
+    //cms.onServerStart();
 
-    cms.makeForm('1', doc._id,'Normal Product',1,{
-        create: true,
-        update: true,
-        read: true,
-        delete: true
-    },{
-        name: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
-        hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
-        active: {order:3,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
-    },function(err){});
+//id, userId, name, order, parentFormId, parentItemId, permission, itemPrototype, callback
+    /*cms.makeForm({
+        _id: mongoose.Types.ObjectId('303030303030303030303030'),
+        party: 'shanghai',
+        formName: 'Content Seed',
+        order: 0,
+        parentItem: {formId: null, itemId: null},
+        permission: {create: true, update: true, read: true, delete: true},
+        itemPrototype: {
+            itemName: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
+            //html: {order:3,display:false,hidden:false,readOnly:false,name:'Content',inputType:'html',dataType:'String',defaultValue:''},
+            hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
+            active: {order:4,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
+        }},function(err){});*/
 
-    cms.makeForm('2', doc._id,'Level 1 Menu',2,{
-        create: false,
-        update: true,
-        read: true,
-        delete: true
-    },{
-        name: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
-        url: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
-        hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
-        active: {order:3,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
-    },function(err){});
+    /*cms.makeForm({
+        _id: mongoose.Types.ObjectId('303030303030303030303031'),
+        party: 'shanghai',
+        formName: 'Normal Product',
+        order: 1,
+        parentItem: {formId:null,itemId:null},
+        permission: {create: true, update: true, read: true, delete: true},
+        itemPrototype: {
+            name: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
+            hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
+            active: {order:3,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
+        }},function(err){});*/
 
-    cms.makeForm('3', doc._id,'Level 2 Menu',3,{
-        create: false,
-        update: true,
-        read: true,
-        delete: true
-    },{
-        name: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
-        url: {order:1,display:true,hidden:false,readOnly:true,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
-        hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
-        active: {order:3,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
-    },function(err){});
+    /*cms.makeForm({
+        _id: mongoose.Types.ObjectId('303030303030303030303031'),
+        party: 'shanghai',
+        formName: 'Level 1 main menu',
+        order: 1,
+        parentItem: {formId: null, itemId: null},
+        permission: {create: true, update: true, read: true, delete: true},
+        itemPrototype: {
+            name: {order:1,display:true,hidden:false,readOnly:false,name:'Title',inputType:'text',dataType:'String',defaultValue:'No Title'},
+            hide: {order:2,display:true,hidden:false,readOnly:false,name:'Hide',inputType:'checkbox',dataType:'Boolean',defaultValue:false},
+            active: {order:3,display:false,hidden:true,readOnly:false,name:'Active',inputType:'checkbox',dataType:'Boolean',defaultValue:true}
+        }},function(err){});*/
+
 });
 
 

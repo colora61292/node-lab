@@ -6,8 +6,9 @@
 
 <body>
 <div class="container">
-    <% include ../widgets_/web-main-menu.ejs %>
+    <div class="row clearfix"></div>
     <div class="row clearfix">
+        <% include ../widgets_/web-main-menu.ejs %>
         <div class="col-md-3 column">
             <div class="panel-group" id="panel-489719">
                 <div class="panel panel-default">
@@ -20,52 +21,64 @@
                                 });
                             </script>
                             <ul id="menu" class="navbar-collapse">
-                                <li class="ui-state-disabled"><a href="#">农产品</a></li>
-                                <li><a href="#">酒类</a></li>
-                                <li><a href="#">纺织品</a></li>
-                                <li> <a href="#">钢材</a>
+                                <li><a href="#">农产品</a>
                                     <ul>
-                                        <li class="ui-state-disabled"><a href="#">螺纹钢</a></li>
-                                        <li><a href="#">卷材</a></li>
-                                        <li><a href="#">板材</a></li>
+                                        <li>
+                                            <a href="#B50011">松脂</a>
+                                        </li>
+                                        <li>
+                                            <a href="#B50010">鸭绒</a>
+                                        </li>
+                                        <li>
+                                            <a href="#C20004">新疆枣好牌</a>
+                                        </li>
+                                        <li>
+                                            <a href="#C50001">香茶松阳</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BBF">黑木耳</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BOLL">原酒崃岭</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BCYDE">羊绒纱线德爱尔</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BMU">香菇</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BRURV">天胶橡胶谷</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BROH">菜籽油红蜻蜓</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BCAHY">山羊绒宏业</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BCXJ">棉花新疆</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BCEC">棉花华东</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BMADD">玉米丹东</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BAPYT">苹果（烟台）</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BGR">脂松香</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BWSS">绵白糖</a>
+                                        </li>
+                                        <li>
+                                            <a href="#BWGS">白砂糖</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a href="#">棉织品</a></li>
-                                <li> <a href="#">苹果</a>
-                                    <ul>
-                                        <li> <a href="#">生活用品</a>
-                                            <ul>
-                                                <li><a href="#">糖类</a></li>
-                                                <li><a href="#">玉米</a></li>
-                                                <li><a href="#">鸭绒</a></li>
-                                            </ul>
-                                        </li>
-                                        <li> <a href="#">橡胶</a>
-                                            <ul>
-                                                <li><a href="#">香蕉</a></li>
-                                                <li><a href="#">大米</a></li>
-                                                <li><a href="#">大蒜</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">大葱</a></li>
-                                    </ul>
-                                </li>
-                                <li class="ui-state-disabled"><a href="#">辣椒</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading"> <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-489719" href="#panel-element-439605">竞买产品</a> </div>
-                    <div id="panel-element-439605" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <script>
-                                $(function() {
-                                    $( "#menu" ).menu();
-                                });
-                            </script>
-                            <ul id="menu">
-                                <li class="ui-state-disabled"><a href="#">农产品</a></li>
                                 <li><a href="#">酒类</a></li>
                                 <li><a href="#">纺织品</a></li>
                                 <li> <a href="#">钢材</a>
@@ -101,23 +114,9 @@
                     </div>
                 </div>
             </div>
-            <br/>
-            <button type="button" class="btn btn-default btn-block active">实时数据</button>
-            <br/>
-            <button type="button" class="btn btn-default btn-block active">竞买信息</button>
-            <br/>
-            <button type="button" class="btn btn-default btn-block active">交收信息</button>
-            <br/>
-            <button type="button" class="btn btn-default btn-block active">存货凭证报</button>
-            <br/>
-            <button type="button" class="btn btn-default btn-block active">竞买交易</button>
-            <br/>
-            <button type="button" class="btn btn-default btn-block active">交易软件下载</button>
         </div>
         <div class="col-md-9 column">
-            <div class="container">
-                <%-body_ %>
-            </div>
+            <%-body_ %>
         </div>
     </div>
 </div>

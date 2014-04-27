@@ -13,6 +13,7 @@
         <table class="table">
             <tr>
                 <td width="1%">&nbsp;</td>
+                <td width="1%" nowrap>Form ID</td>
                 <td width="1%" nowrap>Item ID</td>
                 <% for(var key in itemPrototype){ %>
                 <%  if(itemPrototype[key].display == true){ %>
@@ -23,10 +24,11 @@
             <% for(var i in itemList){ %>
             <tr>
                 <td><a href="<%-kw.url.getUrlByPathInfo('cms/user/item-edit.index',{formId:formId,itemId:itemList[i]._id}) %>">Edit</a></td>
+                <td><%-formId %></td>
                 <td><%-itemList[i]._id %></td>
                 <% for(var j in itemPrototype){ %>
                 <%  if(itemPrototype[j].display == true){ %>
-                <td><%-itemList[i][j] %></td>
+                <td><%-itemList[i][itemPrototype[j].id] %></td>
                 <%  } %>
                 <% } %>
             </tr>

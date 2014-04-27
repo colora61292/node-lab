@@ -9,8 +9,8 @@ Controller.prototype.actions = {
     index: {
         method: 'get',
         handle: function() {
-            var this_ = this;
             if(this.checkUserSessionAlive()){
+                var this_ = this;
                 var model = new this.Model();
                 model.loadList(this.getUserSession().party, function(err){
                     if(err){

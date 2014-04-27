@@ -10,7 +10,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 var kw = require('kw');
-var mongoose = require('classes/mongoose');
+var cms = require('classes/cms');
 //var RedisStore = require('connect-redis')(express);
 var app = express();
 
@@ -48,5 +48,6 @@ if ('development' == require('classes/global').env) {
 kw.application.initApp(app);
 
 http.createServer(app).listen(app.get('port'), function(){
+    cms.onServerStart();
     console.log('Express server listening on port ' + app.get('port'));
 });

@@ -9,8 +9,12 @@ Controller.prototype.actions = {
     index: {
         method: 'get',
         handle: function() {
-            var model = new this.Model();
-            this.renderView(model);
+            if(this.checkUserSessionAlive()){
+                var model = new this.Model();
+                this.renderView(model);
+            }else{
+                this.res.redirect(require('kw').url.getUrlByPathInfo('cms/user/login.index'));
+            }
         }
     }
 };
