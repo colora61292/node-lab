@@ -45,10 +45,6 @@ config.route = {
     'web/rule/law.index':'/rule/law'
 };
 
-config.formId = {
-    sitemap:'535c5d2d51cfe4000010e37b'
-};
-
 config.fileUpload = {
     rootUrl:'/uploads/',
     savePath:'public/uploads/'

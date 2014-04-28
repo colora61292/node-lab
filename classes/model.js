@@ -20,12 +20,12 @@ Model.prototype.loadContent = function(callback){
 
 Model.prototype.loadMainMenu = function(callback){
 
-    /*var cms = require('classes/cms');
+    var cms = require('classes/cms');
 
-     cms.getItems();*/
+    /* cms.getItems();*/
     var this_ = this;
 
-    var formId = require('classes/global').config.formId.sitemap;
+    var formId = '535c5d2d51cfe4000010e37b';
 
     var Form = require('classes/mongoose').model('Form');
 
