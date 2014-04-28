@@ -7,6 +7,7 @@ var Model = function(model){
     this.rightColumn = false;
     this.levelOneMenuList = [];
     this.levelTwoMenuList = [];
+    this.pageContent = '';
 };
 
 //extend super class
